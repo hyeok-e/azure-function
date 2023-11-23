@@ -29,7 +29,7 @@ for blob in blobs_list:
     blob_client = container_client.get_blob_client(blob.name)
 
     if blob_creation_time is None:
-        blob_creation_time = blob.creation_time.replace(tzinfo=timezone.utc)
+        blob_creation_time = blob_client.get_blob_properties().creation_time.replace(tzinfo=timezone.utc)
 
     if input_file_extension in blob.name and blob_path in blob.name and blob.creation_time >= one_day_ago:
         blob_client.set_http_headers(content_settings=ContentSettings(content_type=output_content_type_mp4))
