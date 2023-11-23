@@ -1,7 +1,7 @@
 import logging
 import azure.functions as func
 from azure.storage.blob import BlobServiceClient, ContentSettings
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 def main(myblob: func.InputStream):
     if myblob.name and myblob.length:
