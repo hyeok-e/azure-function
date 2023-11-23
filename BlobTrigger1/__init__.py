@@ -19,12 +19,18 @@ blob_service_client = BlobServiceClient.from_connection_string(connection_string
 container_client = blob_service_client.get_container_client(container=container_name)
 blobs_list = container_client.list_blobs(name_starts_with=blob_path)
 
-#blob creation time check variable
+# blob creation time check variable
 current_time = datetime.utcnow()
 one_day_ago = current_time - timedelta(days=1)
+blob_creation_time = None
 
+# blob mimetype change
 for blob in blobs_list:
     blob_client = container_client.get_blob_client(blob.name)
+
+    if blob_creation_time is None:
+        blob_creation_time = blob.creation_time.replace(tzinfo=timezone.utc)
+
     if input_file_extension in blob.name and blob_path in blob.name and blob.creation_time >= one_day_ago:
         blob_client.set_http_headers(content_settings=ContentSettings(content_type=output_content_type_mp4))
     else:
