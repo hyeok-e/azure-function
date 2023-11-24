@@ -22,6 +22,7 @@ blobs_list = container_client.list_blobs(name_starts_with=blob_path)
 # blob creation time check variable
 current_time = datetime.utcnow()
 one_day_ago = current_time - timedelta(days=1)
+one_day_ago = one_day_ago.replace(tzinfo=timezone.utc)
 blob_creation_time = None
 
 # blob mimetype change
