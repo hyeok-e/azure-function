@@ -3,6 +3,13 @@ import azure.functions as func
 from azure.storage.blob import BlobServiceClient, ContentSettings
 from datetime import datetime, timedelta, timezone
 
+def main(myblob: func.InputStream):
+    # if myblob.name and myblob.length:
+    #     logging.info(f"Python blob trigger function processed blob \n"
+    #                 f"Name: {myblob.name}\n"
+    #                 f"Blob Size: {myblob.length} bytes")
+    pass
+
 # prd container variable
 connection_string = "DefaultEndpointsProtocol=https;AccountName=prdbizv3;AccountKey=vkKPUKGacSCiC8PC7g/dEsLB4mRFCwaM/1vWPoL1MCnocm60CNHifXwzxGeoXndYv9/bZzAwdMgc+AStPlMEYA==;EndpointSuffix=core.windows.net"
 container_name = "record"
@@ -30,3 +37,4 @@ for blob in blobs_list:
         blob_client.set_http_headers(content_settings=ContentSettings(content_type=output_content_type_mp4))
     else:
         pass
+    
