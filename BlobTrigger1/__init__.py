@@ -30,4 +30,3 @@ for blob in blobs_list:
         blob_client.set_http_headers(content_settings=ContentSettings(content_type=output_content_type_mp4))
     else:
         pass
-    
